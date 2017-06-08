@@ -8,8 +8,8 @@ import App from './components/App';
 let defaultState = {
 	queries: [],
 	products: []
-}
-let store = createStore(cySearchApp, defaultState);
+};
+let store = createStore(cySearchApp, defaultState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 render(
 	<Provider store={store}>
