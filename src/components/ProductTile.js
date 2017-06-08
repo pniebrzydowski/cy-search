@@ -6,6 +6,8 @@ const ProductTile = (query) => (
 	</li>
 );
 
-ProductTile.propTypes = {};
+ProductTile.propTypes = {
+	query: PropTypes.string.isRequired
+};
 
 export default ProductTile;

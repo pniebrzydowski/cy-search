@@ -5,7 +5,11 @@ import {createStore} from 'redux';
 import cySearchApp from './reducers';
 import App from './components/App';
 
-let store = createStore(cySearchApp);
+let defaultState = {
+	queries: [],
+	products: []
+}
+let store = createStore(cySearchApp, defaultState);
 
 render(
 	<Provider store={store}>
