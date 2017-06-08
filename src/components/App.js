@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchHeader from './SearchHeader';
+import SearchHeader from '../containers/SearchHeader';
 import Products from '../containers/Products';
 import Filters from '../containers/FilterList';
 

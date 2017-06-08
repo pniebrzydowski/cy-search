@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+/*import { connect } from 'react-redux'
 import { setFilter } from '../actions'
 import Filter from '../components/Filter';
 
@@ -21,4 +21,4 @@ const FilterList = connect(
 	mapDispatchToProps
 )(Filter);
 
-export default FilterList
+export default FilterList*/

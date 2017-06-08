@@ -1,17 +1,17 @@
 import { connect } from 'react-redux'
 import ProductList from '../components/ProductList'
 
-const getVisibleProducts = (products, filter) => {
-	switch (products) {
+const getVisibleProducts = (query) => {
+	switch (query) {
 		//return products.filter(t => t.??);
 		default:
-			return products;
+			return query;
 	}
 }
 
 const mapStateToProps = (state) => {
 	return {
-		products: getVisibleProducts(state.products, state.visibilityFilter)
+		products: getVisibleProducts(state.query)
 	}
 }
 

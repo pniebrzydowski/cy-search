@@ -25,6 +25,6 @@ let SearchHeader = ({ dispatch }) => {
 		</div>
 	)
 }
-AddTodo = connect()(SearchHeader);
+SearchHeader = connect()(SearchHeader);
 
 export default SearchHeader;

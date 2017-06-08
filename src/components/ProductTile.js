@@ -1,19 +1,11 @@
 import React, { PropTypes } from 'react'
 
-const ProductTile = (imgSrc, title, text, onClick) => (
+const ProductTile = (query) => (
 	<li>
-		<img src="{imgSrc}" alt="{title}" />
-		<h2>{title}</h2>
-		<p>{text}</p>
-		<button onClick="{onClick}">Check Availability</button>
+		{query}
 	</li>
 );
 
-Todo.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	imgSrc: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	text: PropTypes.string.isRequired
-};
+ProductTile.propTypes = {};
 
 export default ProductTile;

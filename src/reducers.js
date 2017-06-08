@@ -4,11 +4,14 @@ import { DO_SEARCH } from './actions';
 function search(state = [], action) {
 	switch(action.type) {
 		case DO_SEARCH:
-			return action.query;
+			return {
+				query: action.query
+			};
 		default:
 			return state;
 	}
 }
+
 const cySearchApp = combineReducers({
 	search
 });
