@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-//import {} from './actions';
+import { DO_SEARCH } from './actions';
 
 function search(state = [], action) {
 	switch(action.type) {
