@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import ProductCard from './ProductCard'
 
-
 const ProductList = ( {products} ) => (
 	<div>
 		{products.map(product =>

@@ -1,28 +1,39 @@
-import React, { PropTypes } from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
-const Filter = ({ active, name, depth, onSelect}) => {
-
-	if (active) {
-		return <span>{children}</span>
-	}
-
+const Filter = ({ filter, onFilter}) => {
 	return (
-		<li class="depth {depth}">
-			{}
-			 onChange={e => {
-				 e.preventDefault();
-				 onSelect()
-			 }}
+		<li
+			className={'depth-'+filter.depth}
+			onClick={e => {
+				e.preventDefault();
+				onFilter(filter.key, filter.value)
+			}}
 		>
-			{children}
+			{filter.value}
+			/*{
+				filter.children &&
+					filter.children.map(child =>
+						<Filter
+							key={child.key}
+							onFilter={onFilter}
+							{...child}
+						/>
+					)
+			}*/
 		</li>
 	)
 };
 
-Link.propTypes = {
-	active: PropTypes.bool.isRequired,
-	depth: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired
+Filter.propTypes = {
+	key: React.PropTypes.string.isRequired,
+	value: React.PropTypes.string.isRequired,
+	depth: React.PropTypes.number,
+	children: React.PropTypes.arrayOf(React.PropTypes.shape({
+		key: React.PropTypes.string.isRequired,
+		value: React.PropTypes.string.isRequired
+	})),
+	onFilter: React.PropTypes.func.isRequired
 };
 
-export default Filter;
+export default connect()(Filter);
