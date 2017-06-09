@@ -3,14 +3,14 @@ import ProductCard from './ProductCard'
 
 
 const ProductList = ( {products} ) => (
-	<ul>
+	<div>
 		{products.map(product =>
 		 <ProductCard
 			 key={product.id}
 			 {...product}
 		 />
 		 )}
-	</ul>
+	</div>
 );
 
 ProductList.propTypes = {
