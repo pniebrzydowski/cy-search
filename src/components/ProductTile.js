@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 const ProductTile = (query) => (
 	<li>
-		{query}
+		{query.query}
 	</li>
 );
 
