@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react'
 
-const ProductTile = (query) => (
+const ProductTile = (product) => (
 	<li>
-		{query.query}
+		{product.id} : {product.title}
 	</li>
 );
 
 ProductTile.propTypes = {
-	query: PropTypes.string.isRequired
+	id: PropTypes.number.isRequired,
+	title: PropTypes.string.isRequired
 };
 
 export default ProductTile;

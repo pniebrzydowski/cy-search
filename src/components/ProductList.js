@@ -2,20 +2,21 @@ import React, { PropTypes } from 'react'
 import ProductTile from './ProductTile'
 
 
-const ProductList = ( {queries} ) => (
+const ProductList = ( {products} ) => (
 	<ul>
-		{queries.map(query =>
+		{products.map(product =>
 		 <ProductTile
-			 key={query.query}
-			 {...query}
+			 key={product.id}
+			 {...product}
 		 />
 		 )}
 	</ul>
 );
 
 ProductList.propTypes = {
-	queries: PropTypes.arrayOf(PropTypes.shape({
-		query: PropTypes.string.isRequired
+	products: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.number.required,
+		title: PropTypes.string.required
 	}).isRequired).isRequired
 };
 
