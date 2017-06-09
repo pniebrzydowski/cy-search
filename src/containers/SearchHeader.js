@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { doSearch } from '../actions'
+import { doSearch, fetchProducts } from '../actions'
 
 let SearchHeader = ({ dispatch }) => {
 	let input;
@@ -12,7 +12,11 @@ let SearchHeader = ({ dispatch }) => {
 				if (!input.value.trim()) {
 					return
 				}
+				let url =
+					'https://www.checkyeti.com/rest/v1/customer/products' +
+					'?query=' + input.value;
 				dispatch(doSearch(input.value));
+				dispatch(fetchProducts(url));
 				input.value = '';
 			}}>
 				<input ref={node => {

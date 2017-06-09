@@ -26,12 +26,11 @@ export function receiveProducts(json) {
 }
 
 export function fetchProducts(url) {
-	//base url = 'https://www.checkyeti.com/rest/v1/customer/products'
-
 	return function (dispatch) {
 		dispatch(requestProducts());
-		return fetch(url)
-			.then(response => response.json())
+		return fetch(url, {
+			method: 'GET'
+		}).then(response => response.json())
 			.then(json => dispatch(receiveProducts(json)))
 	}
 }
