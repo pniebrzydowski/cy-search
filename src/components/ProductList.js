@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
-import ProductTile from './ProductTile'
+import ProductCard from './ProductCard'
 
 
 const ProductList = ( {products} ) => (
 	<ul>
 		{products.map(product =>
-		 <ProductTile
+		 <ProductCard
 			 key={product.id}
 			 {...product}
 		 />
