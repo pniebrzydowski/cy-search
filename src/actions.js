@@ -12,7 +12,7 @@ export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 //other constants
 export function fetchFilters() {
 	return function (dispatch) {
-		let url = '';
+		let url = 'https://www.checkyeti.com/rest/v1/customer/product-filters';
 		dispatch(requestFilters());
 		return fetch(url, {
 			method: 'GET'

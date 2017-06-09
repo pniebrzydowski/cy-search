@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import { doSearch, fetchProducts } from '../actions'
+import { doSearch, fetchProducts, fetchFilters } from '../actions'
 
 const SearchHeader = ({ dispatch, history }) => {
 	let input;
@@ -22,6 +22,8 @@ const SearchHeader = ({ dispatch, history }) => {
 						'https://www.checkyeti.com/rest/v1/customer/products' + queryString;
 					dispatch(doSearch(input.value));
 					dispatch(fetchProducts(url));
+					dispatch(fetchFilters());
+
 					history.push(queryString);
 					input.value = '';
 				}}>

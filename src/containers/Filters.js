@@ -3,12 +3,12 @@ import { addFilter, removeFilter } from '../actions';
 import FilterList from '../components/FilterList'
 
 const getFilterOptions = (filterOptions) => {
-	for(let i=0; i<filterOptions.items.length; i++) {
-		let opt = filterOptions.items[i];
+	for(let opt of filterOptions.items) {
+		opt.id = opt.key;
 		opt.isApplied = false;
 	}
 	return filterOptions.items;
-}
+};
 
 const mapStateToProps = (state) => {
 	return {
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Filters = connect(
 	mapStateToProps,
-//	mapDispatchToProps
+	mapDispatchToProps
 )(FilterList);
 
 export default Filters;

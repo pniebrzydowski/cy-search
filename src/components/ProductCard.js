@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 const ProductCard = (product) => (
 	<div className="col-sm-6 col-md-4">
 		<div className="thumbnail">
-			<img src={product.coverPhoto} alt={product.title}></img>
+			<img src={product.coverPhoto} alt={product.title} />
 			<div className="caption">
 				<h3>{product.title}</h3>
 				<p>{product.productType.value}</p>

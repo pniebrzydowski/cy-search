@@ -14,6 +14,7 @@ function query(state = '', action) {
 
 function filterOptions(state = {
 	isFetching: false,
+	fetched: false,
 	items: []
 }, action) {
 	switch (action.type) {
@@ -24,6 +25,7 @@ function filterOptions(state = {
 		case RECEIVE_FILTERS:
 			return Object.assign({}, state, {
 				isFetching: false,
+				fetched: true,
 				items: action.filterOptions,
 				lastUpdated: action.receivedAt
 			});
