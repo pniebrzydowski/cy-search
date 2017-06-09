@@ -5,6 +5,7 @@ const getVisibleProducts = (products,query) => {
 	switch (query) {
 		//return products.filter(t => t.??);
 		default:
+			//return products.items;
 			return [
 				{id:1,title:'Product'}
 			];

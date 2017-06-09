@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import { DO_SEARCH } from './actions';
-import { DO_FILTER } from './actions';
+import {
+	DO_SEARCH, REQUEST_PRODUCTS, RECEIVE_PRODUCTS
+} from './actions';
 
 function query(state = '', action) {
 	switch(action.type) {
@@ -11,10 +12,24 @@ function query(state = '', action) {
 	}
 }
 
-function visibleProducts(state = [], action) {
-	switch(action.type) {
-		case DO_FILTER:
-			return action.products;
+function products(state = {
+	isFetching: false,
+	didInvalidate: false,
+	items: []
+}, action) {
+	switch (action.type) {
+		case REQUEST_PRODUCTS:
+			return Object.assign({}, state, {
+				isFetching: true,
+				didInvalidate: false
+			})
+		case RECEIVE_PRODUCTS:
+			return Object.assign({}, state, {
+				isFetching: false,
+				didInvalidate: false,
+				items: action.products,
+				lastUpdated: action.receivedAt
+			})
 		default:
 			return state;
 	}
@@ -22,7 +37,7 @@ function visibleProducts(state = [], action) {
 
 const cySearchApp = combineReducers({
 	query,
-	visibleProducts
+	products
 });
 
 export default cySearchApp;

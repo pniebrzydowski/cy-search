@@ -1,6 +1,9 @@
+import fetch from 'isomorphic-fetch';
+
 //action types
 export const DO_SEARCH = 'DO_SEARCH';
-export const DO_FILTER = 'DO_FILTER';
+export const REQUEST_PRODUCTS = 'REQUEST_PRODUCTS';
+export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 
 //other constants
 
@@ -10,6 +13,25 @@ export function doSearch(query) {
 	return { type: DO_SEARCH, query };
 }
 
-export function doFilter(filter) {
-	return { type: DO_FILTER, filter };
+export function requestProducts() {
+	return {type: REQUEST_PRODUCTS};
+}
+
+export function receiveProducts(json) {
+	return {
+		type: RECEIVE_PRODUCTS,
+		products: json,
+		receivedAt: Date.now()
+	}
+}
+
+export function fetchProducts(url) {
+	//base url = 'https://www.checkyeti.com/rest/v1/customer/products'
+
+	return function (dispatch) {
+		dispatch(requestProducts());
+		return fetch(url)
+			.then(response => response.json())
+			.then(json => dispatch(receiveProducts(json)))
+	}
 }
