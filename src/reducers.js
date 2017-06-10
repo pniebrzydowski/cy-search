@@ -13,13 +13,16 @@ function query(state = {
 				query: action.query,
 			});
 		case ADD_FILTER:
-			return Object.assign({}, state.filters, [
-				...state.filters,
-				{
-					key: action.filter.key,
-					value: action.filter.value
-				}
-			]);
+			return {
+				...state,
+				filters: [
+					...state.filters,
+					{
+						key: action.filter.key,
+						value: action.filter.value
+					}
+				]
+			};
 		case REMOVE_FILTER:
 			return state;
 		default:

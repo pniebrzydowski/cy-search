@@ -23,11 +23,13 @@ class App extends Component {
 		if(this.props.query !== prevProps.query) {
 			const { dispatch, history, query } = this.props;
 			let queryString = '?';
-			queryString += "query=" + query.query;
+			if(query.query !== '') {
+				queryString += "query=" + query.query;
+			}
 
 			let filterString = [];
 			for(let filter of query.filters) {
-				if(query.query != '') {
+				if(query.query !== '') {
 					filterString += "&"
 				}
 				filterString += filter.key + "=" + filter.value;

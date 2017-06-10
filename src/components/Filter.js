@@ -1,17 +1,41 @@
 import React from 'react';
 
-const renderChildren = (nodes, onFilterAdd, onFilterRemove) => {
+const renderNodes = (item, category, onFilterAdd, onFilterRemove) => {
+	let nodes = item.children;
 	if(!nodes || nodes.length === 0) return null;
-	else {
+
+	if(item.depth > 1) {
 		return (
 			<ul>
 				{nodes.map(node =>
-					<Filter
+					<li className="filter-subcategory" key={node.id}>
+						{node.value}
+
+						{renderNodes(node, category, onFilterAdd, onFilterRemove)}
+					</li>
+				)};
+			</ul>
+		)
+	}
+
+	if(item.depth === 1) {
+		return (
+			<ul>
+				{nodes.map(node =>
+					<li
 						key={node.id}
-						{...node}
-						onFilterAdd={onFilterAdd}
-						onFilterRemove={onFilterRemove}
-					/>
+						onClick={e => {
+							e.preventDefault();
+							e.stopPropagation();
+							if(!node.isApplied) {
+								onFilterAdd({key: category, value: node.id});
+							} else {
+								onFilterRemove({key: category, value: node.id});
+							}
+						}}
+					>
+						{node.value}
+					</li>
 				)}
 			</ul>
 		);
@@ -19,21 +43,10 @@ const renderChildren = (nodes, onFilterAdd, onFilterRemove) => {
 };
 
 const Filter = (filter, onFilterAdd, onFilterRemove) => (
-	<li
-		key={filter.id}
-		onClick={e => {
-			e.preventDefault();
-			e.stopPropagation();
-			if(!filter.isApplied) {
-				filter.onFilterAdd(filter);
-			} else {
-				filter.onFilterRemove(filter);
-			}
-		}}
-	>
+	<li className="filter-category"	key={filter.id}>
 		{filter.value}
 
-		{renderChildren(filter.children, filter.onFilterAdd, filter.onFilterRemove)}
+		{renderNodes(filter, filter.id, filter.onFilterAdd, filter.onFilterRemove)}
 	</li>
 );
 
