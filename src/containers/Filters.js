@@ -2,15 +2,21 @@ import { connect } from 'react-redux'
 import { addFilter, removeFilter } from '../actions';
 import FilterList from '../components/FilterList'
 
-const getFilterOptions = (filterOptions) => {
+const getFilterOptions = (filterOptions, query) => {
 	let updateItems = (items) => {
 		for(let opt of items) {
 			opt.id = opt.key;
-			opt.isApplied = false;
-
-			if(opt.children) {
-				updateItems(opt.children);
+			if(opt.depth && opt.depth > 0) {
+				if(opt.children) {
+					updateItems(opt.children);
+				}
+				continue;
 			}
+
+			let applied = query.filters.find((filter) => {
+				return filter.value === opt.id;
+			});
+			opt.isApplied = (applied !== undefined)
 		}
 	};
 
@@ -20,7 +26,7 @@ const getFilterOptions = (filterOptions) => {
 
 const mapStateToProps = (state) => {
 	return {
-		filterOptions: getFilterOptions(state.filterOptions)
+		filterOptions: getFilterOptions(state.filterOptions, state.query)
 	}
 };
 

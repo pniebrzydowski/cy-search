@@ -13,7 +13,7 @@ const renderNodes = (item, category, onFilterAdd, onFilterRemove) => {
 
 						{renderNodes(node, category, onFilterAdd, onFilterRemove)}
 					</li>
-				)};
+				)}
 			</ul>
 		)
 	}
@@ -38,7 +38,7 @@ const renderNodes = (item, category, onFilterAdd, onFilterRemove) => {
 					</li>
 				)}
 			</ul>
-		);
+		)
 	}
 };
 
@@ -58,7 +58,7 @@ Filter.propTypes = {
 		id: React.PropTypes.string.isRequired,
 		value: React.PropTypes.string.isRequired
 	})),
-	isApplied: React.PropTypes.bool.isRequired,
+	isApplied: React.PropTypes.bool,
 	onFilterAdd: React.PropTypes.func.isRequired,
 	onFilterRemove: React.PropTypes.func.isRequired
 };

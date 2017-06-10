@@ -24,7 +24,16 @@ function query(state = {
 				]
 			};
 		case REMOVE_FILTER:
-			return state;
+			let index = state.filters.findIndex((filter) => {
+				return filter.value === action.filter.value;
+			});
+			return {
+				...state,
+				filters: [
+					...state.filters.slice(0, index),
+					...state.filters.slice(index + 1)
+				]
+			};
 		default:
 			return state;
 	}
