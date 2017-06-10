@@ -3,10 +3,18 @@ import { addFilter, removeFilter } from '../actions';
 import FilterList from '../components/FilterList'
 
 const getFilterOptions = (filterOptions) => {
-	for(let opt of filterOptions.items) {
-		opt.id = opt.key;
-		opt.isApplied = false;
-	}
+	let updateItems = (items) => {
+		for(let opt of items) {
+			opt.id = opt.key;
+			opt.isApplied = false;
+
+			if(opt.children) {
+				updateItems(opt.children);
+			}
+		}
+	};
+
+	updateItems(filterOptions.items);
 	return filterOptions.items;
 };
 
@@ -18,12 +26,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onFilterSelect: (filter) => {
-			if(filter.isApplied) {
-				dispatch(removeFilter(filter));
-			} else {
-				dispatch(addFilter(filter));
-			}
+		onFilterAdd: (filter) => {
+			dispatch(addFilter(filter));
+		},
+		onFilterRemove: (filter) => {
+			dispatch(removeFilter(filter));
 		}
 	}
 };

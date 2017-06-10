@@ -1,13 +1,14 @@
 import React from 'react';
 import Filter from './Filter';
 
-const FilterList = ( {filterOptions, onFilterSelect} ) => (
+const FilterList = ( {filterOptions, onFilterAdd, onFilterRemove} ) => (
 	<ul>
 		{filterOptions.map(opt =>
 			<Filter
 				key={opt.id}
 				{...opt}
-				onFilterSelect={onFilterSelect}
+				onFilterAdd={onFilterAdd}
+				onFilterRemove={onFilterRemove}
 			/>
 		)}
 	</ul>
@@ -18,7 +19,8 @@ FilterList.propTypes = {
 		id: React.PropTypes.string.isRequired,
 		isApplied: React.PropTypes.bool.isRequired
 	}).isRequired).isRequired,
-	onFilterSelect: React.PropTypes.func.isRequired
+	onFilterAdd: React.PropTypes.func.isRequired,
+	onFilterRemove: React.PropTypes.func.isRequired
 };
 
 export default FilterList;

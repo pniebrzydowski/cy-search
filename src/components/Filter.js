@@ -1,6 +1,6 @@
 import React from 'react';
 
-const renderChildren = (nodes, onFilterSelect) => {
+const renderChildren = (nodes, onFilterAdd, onFilterRemove) => {
 	if(!nodes || nodes.length === 0) return null;
 	else {
 		return (
@@ -9,7 +9,8 @@ const renderChildren = (nodes, onFilterSelect) => {
 					<Filter
 						key={node.id}
 						{...node}
-						onFilterSelect={onFilterSelect}
+						onFilterAdd={onFilterAdd}
+						onFilterRemove={onFilterRemove}
 					/>
 				)}
 			</ul>
@@ -17,17 +18,22 @@ const renderChildren = (nodes, onFilterSelect) => {
 	}
 };
 
-const Filter = (filter, onFilterSelect) => (
+const Filter = (filter, onFilterAdd, onFilterRemove) => (
 	<li
 		key={filter.id}
 		onClick={e => {
 			e.preventDefault();
-			onFilterSelect(filter.id, filter.value)
+			e.stopPropagation();
+			if(!filter.isApplied) {
+				filter.onFilterAdd(filter);
+			} else {
+				filter.onFilterRemove(filter);
+			}
 		}}
 	>
 		{filter.value}
 
-		{renderChildren(filter.children, onFilterSelect)}
+		{renderChildren(filter.children, filter.onFilterAdd, filter.onFilterRemove)}
 	</li>
 );
 
@@ -39,7 +45,9 @@ Filter.propTypes = {
 		id: React.PropTypes.string.isRequired,
 		value: React.PropTypes.string.isRequired
 	})),
-	onFilterSelect: React.PropTypes.func.isRequired
+	isApplied: React.PropTypes.bool.isRequired,
+	onFilterAdd: React.PropTypes.func.isRequired,
+	onFilterRemove: React.PropTypes.func.isRequired
 };
 
 export default (Filter);
