@@ -9,9 +9,10 @@ function query(state = {
 }, action) {
 	switch(action.type) {
 		case DO_SEARCH:
-			return Object.assign({}, state, {
-				query: action.query,
-			});
+			return {
+				...state,
+				query: action.query
+			};
 		case ADD_FILTER:
 			return {
 				...state,
@@ -46,16 +47,18 @@ function filterOptions(state = {
 }, action) {
 	switch (action.type) {
 		case REQUEST_FILTERS:
-			return Object.assign({}, state, {
-				isFetching: true,
-			});
+			return {
+				...state,
+				isFetching: true
+			};
 		case RECEIVE_FILTERS:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				isFetching: false,
 				fetched: true,
 				items: action.filterOptions,
 				lastUpdated: action.receivedAt
-			});
+			};
 		default:
 			return state;
 	}
@@ -67,15 +70,17 @@ function products(state = {
 }, action) {
 	switch (action.type) {
 		case REQUEST_PRODUCTS:
-			return Object.assign({}, state, {
-				isFetching: true,
-			});
+			return {
+				...state,
+				isFetching: true
+			};
 		case RECEIVE_PRODUCTS:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				isFetching: false,
 				items: action.products,
 				lastUpdated: action.receivedAt
-			});
+			};
 		default:
 			return state;
 	}
