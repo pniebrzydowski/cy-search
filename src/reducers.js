@@ -3,10 +3,25 @@ import {
 	DO_SEARCH, ADD_FILTER, REMOVE_FILTER, REQUEST_FILTERS, RECEIVE_FILTERS, REQUEST_PRODUCTS, RECEIVE_PRODUCTS
 } from './actions';
 
-function query(state = '', action) {
+function query(state = {
+	query: '',
+	filters: []
+}, action) {
 	switch(action.type) {
 		case DO_SEARCH:
-			return action.query;
+			return Object.assign({}, state, {
+				query: action.query,
+			});
+		case ADD_FILTER:
+			return Object.assign({}, state.filters, [
+				...state.filters,
+				{
+					key: action.filter.key,
+					value: action.filter.value
+				}
+			]);
+		case REMOVE_FILTER:
+			return state;
 		default:
 			return state;
 	}
@@ -29,23 +44,6 @@ function filterOptions(state = {
 				items: action.filterOptions,
 				lastUpdated: action.receivedAt
 			});
-		default:
-			return state;
-	}
-}
-
-function filter(state = [], action) {
-	switch(action.type) {
-		case ADD_FILTER:
-			return [
-				...state,
-				action.filter
-			];
-		case REMOVE_FILTER:
-			return [
-				...state,
-				action.filter
-			];
 		default:
 			return state;
 	}
@@ -74,7 +72,6 @@ function products(state = {
 const cySearchApp = combineReducers({
 	query,
 	filterOptions,
-	filter,
 	products
 });
 

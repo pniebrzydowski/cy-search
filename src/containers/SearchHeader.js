@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
-import { doSearch, fetchProducts, fetchFilters } from '../actions'
+import { doSearch } from '../actions'
 
-const SearchHeader = ({ dispatch, history }) => {
+const SearchHeader = ({ dispatch }) => {
 	let input;
 
 	return (
@@ -17,14 +16,8 @@ const SearchHeader = ({ dispatch, history }) => {
 					if (!input.value.trim()) {
 						return
 					}
-					let queryString = '?query=' + input.value;
-					let url =
-						'https://www.checkyeti.com/rest/v1/customer/products' + queryString;
 					dispatch(doSearch(input.value));
-					dispatch(fetchProducts(url));
-					dispatch(fetchFilters());
 
-					history.push(queryString);
 					input.value = '';
 				}}>
 					<input className="form-control" ref={node => {
@@ -37,12 +30,6 @@ const SearchHeader = ({ dispatch, history }) => {
 			</div>
 		</div>
 	)
-}
-
-SearchHeader.propTypes = {
-	history: React.PropTypes.shape({
-		push: React.PropTypes.func.isRequired
-	}).isRequired
 };
 
-export default withRouter(connect()(SearchHeader));
+export default connect()(SearchHeader);

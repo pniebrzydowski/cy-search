@@ -12,13 +12,13 @@ const getVisibleProducts = (products) => {
 		}
 	}
 	return products.items;
-}
+};
 
 const mapStateToProps = (state) => {
 	return {
 		products: getVisibleProducts(state.products)
 	}
-}
+};
 
 /*const mapDispatchToProps = (dispatch) => {
 	return {
@@ -31,6 +31,6 @@ const mapStateToProps = (state) => {
 const Products = connect(
 	mapStateToProps,
 //	mapDispatchToProps
-)(ProductList)
+)(ProductList);
 
 export default Products
