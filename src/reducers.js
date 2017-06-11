@@ -44,7 +44,9 @@ function query(state = {
 			return {
 				...state,
 				urlFetch: false,
-				query: action.query
+				query: action.query,
+				queryVal: action.query,
+				terms: []
 			};
 		case ADD_FILTER:
 			return {
