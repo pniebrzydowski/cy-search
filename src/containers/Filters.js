@@ -3,12 +3,15 @@ import { addFilter, removeFilter } from '../actions';
 import FilterList from '../components/FilterList'
 
 const getFilterOptions = (filterOptions, query) => {
+	if(query.query === '') {
+		return [];
+	}
 	return filterOptions.items;
 };
 
 const mapStateToProps = (state) => {
 	return {
-		filterOptions: getFilterOptions(state.filterOptions, state.query)
+		filterOptions: getFilterOptions(state.filterOptions, state.query),
 	}
 };
 

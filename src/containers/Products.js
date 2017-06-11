@@ -16,7 +16,9 @@ const getVisibleProducts = (products) => {
 
 const mapStateToProps = (state) => {
 	return {
-		products: getVisibleProducts(state.products)
+		products: getVisibleProducts(state.products),
+		fetching: state.products.isFetching,
+		query: state.query.query
 	}
 };
 
