@@ -4,6 +4,19 @@ const renderNodes = (item, tree, onFilterAdd, onFilterRemove) => {
 	let nodes = item.children;
 	if(!nodes || nodes.length === 0) return null;
 
+	let selectFilter = (e, node) => {
+		let opt = {
+			...node,
+			checked: !node.checked
+		};
+		e.stopPropagation();
+		if(!node.checked) {
+			onFilterAdd({key: tree[0], value: node.id, tree: tree.concat(node.id), opt: opt});
+		} else {
+			onFilterRemove({key: tree[0], value: node.id, tree: tree.concat(node.id), opt: opt});
+		}
+	};
+
 	if(item.depth > 1) {
 		return (
 			<ul>
@@ -24,21 +37,11 @@ const renderNodes = (item, tree, onFilterAdd, onFilterRemove) => {
 				{nodes.map(node =>
 					<li
 						key={node.id}
-						onClick={e => {
-							let opt = {
-								...node,
-								checked: !node.checked
-							};
-							e.preventDefault();
-							e.stopPropagation();
-							if(!node.checked) {
-								onFilterAdd({key: tree[0], value: node.id, tree: tree.concat(node.id), opt: opt});
-							} else {
-								onFilterRemove({key: tree[0], value: node.id, tree: tree.concat(node.id), opt: opt});
-							}
-						}}
+						onClick={e => {selectFilter(e,node)}}
 					>
-						<input type="checkbox" name="filter" checked={node.checked} value={node.id} />
+						<input type="checkbox" name="filter"
+									 onClick={e => {selectFilter(e,node)}}
+									 checked={node.checked} value={node.id} />
 						{node.value}
 					</li>
 				)}
