@@ -25,10 +25,13 @@ class App extends Component {
 			if(key === 'query') {
 				query = params[key];
 			} else {
-				filters.push({
-					key: key,
-					value: params[key]
-				});
+				let array = params[key].toString().split(',');
+				for( let filter of array ) {
+					filters.push({
+						"key": key,
+						"value": filter
+					});
+				}
 			}
 		}
 		dispatch(fetchFilters(filters));
