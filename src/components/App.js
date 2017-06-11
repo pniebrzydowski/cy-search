@@ -39,7 +39,8 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if(this.props.query.query === prevProps.query.query) {
+		if(	this.props.query.query === prevProps.query.query &&
+				this.props.query.filters === prevProps.query.filters) {
 			return;
 		}
 		if(this.props.query.urlFetch) {
