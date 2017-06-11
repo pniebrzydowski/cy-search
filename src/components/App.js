@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { urlFetch, doSearch, addFilter, fetchProducts, fetchFilters } from '../actions'
+import { urlFetch, fetchProducts, fetchFilters } from '../actions'
 import { withRouter } from 'react-router-dom';
 import queryString  from 'query-string';
 import SearchHeader from '../containers/SearchHeader';
@@ -84,9 +85,9 @@ class App extends Component {
 }
 
 App.propTypes = {
-	dispatch: React.PropTypes.func.isRequired,
-	history: React.PropTypes.shape({
-		push: React.PropTypes.func.isRequired
+	dispatch: PropTypes.func.isRequired,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
 	}).isRequired
 };
 

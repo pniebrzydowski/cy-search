@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const renderNodes = (item, tree, onFilterAdd, onFilterRemove) => {
 	let nodes = item.children;
@@ -58,13 +59,13 @@ const Filter = (filter, onFilterAdd, onFilterRemove) => (
 );
 
 Filter.propTypes = {
-	id: React.PropTypes.string.isRequired,
-	value: React.PropTypes.string.isRequired,
-	depth: React.PropTypes.number,
-	children: React.PropTypes.array,
-	checked: React.PropTypes.bool,
-	onFilterAdd: React.PropTypes.func.isRequired,
-	onFilterRemove: React.PropTypes.func.isRequired
+	id: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
+	depth: PropTypes.number,
+	children: PropTypes.array,
+	checked: PropTypes.bool,
+	onFilterAdd: PropTypes.func.isRequired,
+	onFilterRemove: PropTypes.func.isRequired
 };
 
 export default (Filter);

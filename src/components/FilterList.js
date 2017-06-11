@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Filter from './Filter';
 
 const FilterList = ( {filterOptions, onFilterAdd, onFilterRemove} ) => (
@@ -15,15 +16,15 @@ const FilterList = ( {filterOptions, onFilterAdd, onFilterRemove} ) => (
 );
 
 FilterList.propTypes = {
-	filterOptions: React.PropTypes.arrayOf(React.PropTypes.shape({
-		id: React.PropTypes.string.isRequired,
-		value: React.PropTypes.string.isRequired,
-		depth: React.PropTypes.number,
-		children: React.PropTypes.array,
-		checked: React.PropTypes.bool
+	filterOptions: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		value: PropTypes.string.isRequired,
+		depth: PropTypes.number,
+		children: PropTypes.array,
+		checked: PropTypes.bool
 	}).isRequired).isRequired,
-	onFilterAdd: React.PropTypes.func.isRequired,
-	onFilterRemove: React.PropTypes.func.isRequired
+	onFilterAdd: PropTypes.func.isRequired,
+	onFilterRemove: PropTypes.func.isRequired
 };
 
 export default FilterList;

@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "isomorphic-fetch": "^2.2.1",
+    "prop-types": "^15.5.10",
     "query-string": "^4.3.4",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",

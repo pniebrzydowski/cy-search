@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types';
 
 const ProductCard = (product) => (
 	<div className="col-sm-6 col-md-4">
