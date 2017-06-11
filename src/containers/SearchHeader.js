@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { doSearch, adjustQuery, fetchTerms } from '../actions'
+import { doSearch, adjustQuery, fetchTerms, receiveTerms } from '../actions'
 import Autocomplete from '../components/Autocomplete';
 
-const SearchHeader = ({ queryVal, terms, submitSearch, updateQueryVal, onTermClick }) => {
+const SearchHeader = ({ queryVal, terms, submitSearch, updateQueryVal, clearSearch, onTermClick }) => {
 	let input;
 
 	return (
@@ -16,9 +16,14 @@ const SearchHeader = ({ queryVal, terms, submitSearch, updateQueryVal, onTermCli
 							<div className="row">
 								<label className="control-label col-md-3 col-sm-4 col-xs-12">SearchYeti</label>
 								<div className="col-md-6 col-sm-5 col-xs12">
-									<input type="text" className="form-control"
-												 value={queryVal} ref={node => {input = node;}}
-												 onChange={updateQueryVal}/>
+									<div className="input-group">
+										<input type="text" className="form-control"
+													 value={queryVal} ref={node => {input = node;}}
+													 onChange={updateQueryVal}/>
+										<span className="input-group-btn">
+											<button className="btn btn-default btn-lg" type="button" onClick={clearSearch}>Clear</button>
+										</span>
+									</div>
 								</div>
 								<div className="col-md-2 col-sm-2 col-xs-12">
 									<button type="submit" className="btn btn-primary btn-lg form-control">
@@ -60,6 +65,10 @@ const mapDispatchToProps = (dispatch) => {
 			let newVal = e.target.value;
 			dispatch(adjustQuery(newVal));
 			dispatch(fetchTerms(newVal));
+		},
+		clearSearch: (e) => {
+			dispatch(adjustQuery(''));
+			dispatch(receiveTerms([]));
 		},
 		onTermClick: (term) => {
 			dispatch(doSearch(term));
