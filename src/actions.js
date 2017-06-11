@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 //action types
 export const URL_FETCH = 'URL_FETCH';
+export const ADJUST_QUERY = 'ADJUST_QUERY';
 export const DO_SEARCH = 'DO_SEARCH';
 export const ADD_FILTER = 'ADD_FILTER';
 export const REMOVE_FILTER = 'REMOVE_FILTER';
@@ -59,6 +60,10 @@ function processFilters(json, filters) {
 //action creators
 export function urlFetch(initState) {
 	return { type: URL_FETCH, initState};
+}
+
+export function adjustQuery(query) {
+	return { type: ADJUST_QUERY, query };
 }
 
 export function doSearch(query) {

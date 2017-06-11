@@ -31,14 +31,14 @@ class App extends Component {
 			}
 		}
 		dispatch(fetchFilters(filters));
-		dispatch(urlFetch({query: query, filters: filters}));
+		dispatch(urlFetch({query: query, queryVal: query, filters: filters}));
 		let url =
 			'https://www.checkyeti.com/rest/v1/customer/products' + urlQueryParams;
 		dispatch(fetchProducts(url));
 	}
 
 	componentDidUpdate(prevProps) {
-		if(this.props.query === prevProps.query) {
+		if(this.props.query.query === prevProps.query.query) {
 			return;
 		}
 		if(this.props.query.urlFetch) {
