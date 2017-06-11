@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { fetchProducts, fetchFilters } from '../actions'
+import { urlFetch, doSearch, addFilter, fetchProducts, fetchFilters } from '../actions'
 import { withRouter } from 'react-router-dom';
+import queryString  from 'query-string';
 import SearchHeader from '../containers/SearchHeader';
 import Products from '../containers/Products';
 import Filters from '../containers/Filters';
@@ -13,32 +14,54 @@ class App extends Component {
 
 	componentDidMount() {
 		const { dispatch } = this.props;
+
+		let query = '';
+		let filters = [];
+		let urlQueryParams = this.props.history.location.search;
+		let params = queryString.parse(urlQueryParams);
+
+		for( let key in params) {
+			if(key === 'query') {
+				query = params[key];
+			} else {
+				filters.push({
+					key: key,
+					value: params[key]
+				});
+			}
+		}
+		dispatch(fetchFilters(filters));
+		dispatch(urlFetch({query: query, filters: filters}));
 		let url =
-			'https://www.checkyeti.com/rest/v1/customer/products';
+			'https://www.checkyeti.com/rest/v1/customer/products' + urlQueryParams;
 		dispatch(fetchProducts(url));
-		dispatch(fetchFilters());
 	}
 
 	componentDidUpdate(prevProps) {
-		if(this.props.query !== prevProps.query) {
-			const { dispatch, history, query } = this.props;
-			let queryString = '?';
-			if(query.query !== '') {
-				queryString += "query=" + query.query;
-			}
-
-			let filterString = [];
-			for(let filter of query.filters) {
-				if(query.query !== '') {
-					filterString += "&"
-				}
-				filterString += filter.key + "=" + filter.value;
-			}
-			let url =
-				'https://www.checkyeti.com/rest/v1/customer/products' + queryString + filterString;
-			dispatch(fetchProducts(url));
-			history.push(queryString + filterString);
+		if(this.props.query === prevProps.query) {
+			return;
 		}
+		if(this.props.query.urlFetch) {
+			return;
+		}
+
+		const { dispatch, history, query } = this.props;
+		let queryString = '?';
+		if(query.query !== '') {
+			queryString += "query=" + query.query;
+		}
+
+		let filterString = [];
+		for(let filter of query.filters) {
+			if(query.query !== '') {
+				filterString += "&"
+			}
+			filterString += filter.key + "=" + filter.value;
+		}
+		let url =
+			'https://www.checkyeti.com/rest/v1/customer/products' + queryString + filterString;
+		dispatch(fetchProducts(url));
+		history.push(queryString + filterString);
 	}
 
 	render () {

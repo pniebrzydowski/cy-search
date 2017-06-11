@@ -3,22 +3,6 @@ import { addFilter, removeFilter } from '../actions';
 import FilterList from '../components/FilterList'
 
 const getFilterOptions = (filterOptions, query) => {
-	let updateItems = (items) => {
-		for(let opt of items) {
-			opt.id = opt.key;
-
-			if(opt.depth && opt.depth > 0) {
-				if(opt.children) {
-					updateItems(opt.children);
-				}
-				continue;
-			}
-
-			opt.checked = opt.checked || false;
-		}
-	};
-
-	updateItems(filterOptions.items);
 	return filterOptions.items;
 };
 

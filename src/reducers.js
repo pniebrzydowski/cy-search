@@ -1,21 +1,31 @@
 import { combineReducers } from 'redux';
 import {
-	DO_SEARCH, ADD_FILTER, REMOVE_FILTER, REQUEST_FILTERS, RECEIVE_FILTERS, REQUEST_PRODUCTS, RECEIVE_PRODUCTS
+	URL_FETCH, DO_SEARCH, ADD_FILTER, REMOVE_FILTER, REQUEST_FILTERS, RECEIVE_FILTERS, REQUEST_PRODUCTS, RECEIVE_PRODUCTS
 } from './actions';
 
 function query(state = {
+	urlFetch: false,
 	query: '',
 	filters: []
 }, action) {
 	switch(action.type) {
+		case URL_FETCH:
+			return {
+				...state,
+				urlFetch: true,
+				query: action.initState.query,
+				filters: action.initState.filters
+			};
 		case DO_SEARCH:
 			return {
 				...state,
+				urlFetch: false,
 				query: action.query
 			};
 		case ADD_FILTER:
 			return {
 				...state,
+				urlFetch: false,
 				filters: [
 					...state.filters,
 					{
