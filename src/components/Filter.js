@@ -19,43 +19,42 @@ const renderNodes = (item, tree, onFilterAdd, onFilterRemove) => {
 
 	if(item.depth > 1) {
 		return (
-			<ul>
+			<div>
 				{nodes.map(node =>
-					<li className="filter-subcategory" key={node.id}>
+					<div key={node.id}>
 						{node.value}
 
 						{renderNodes(node, tree.concat(node.id), onFilterAdd, onFilterRemove)}
-					</li>
+					</div>
 				)}
-			</ul>
+			</div>
 		)
 	}
 
 	if(item.depth === 1) {
 		return (
-			<ul>
+			<div>
 				{nodes.map(node =>
-					<li
-						key={node.id}
-						onClick={e => {selectFilter(e,node)}}
-					>
-						<input type="checkbox" name="filter"
-									 onClick={e => {selectFilter(e,node)}}
-									 checked={node.checked} value={node.id} />
-						{node.value}
-					</li>
+					<div key={node.id} className="checkbox">
+						<label>
+							<input type="checkbox"
+										 onChange={e => selectFilter(e,node)}
+										 checked={node.checked} />
+							{node.value}
+						</label>
+					</div>
 				)}
-			</ul>
+			</div>
 		)
 	}
 };
 
 const Filter = (filter, onFilterAdd, onFilterRemove) => (
-	<li className="filter-category"	key={filter.id}>
+	<div className="list-group-item" key={filter.id}>
 		{filter.value}
 
 		{renderNodes(filter, [filter.id], filter.onFilterAdd, filter.onFilterRemove)}
-	</li>
+	</div>
 );
 
 Filter.propTypes = {

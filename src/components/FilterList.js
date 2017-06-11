@@ -2,7 +2,7 @@ import React from 'react';
 import Filter from './Filter';
 
 const FilterList = ( {filterOptions, onFilterAdd, onFilterRemove} ) => (
-	<ul>
+	<div className="list-group">
 		{filterOptions.map(opt =>
 			<Filter
 				key={opt.id}
@@ -11,7 +11,7 @@ const FilterList = ( {filterOptions, onFilterAdd, onFilterRemove} ) => (
 				onFilterRemove={onFilterRemove}
 			/>
 		)}
-	</ul>
+	</div>
 );
 
 FilterList.propTypes = {

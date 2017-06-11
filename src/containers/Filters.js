@@ -13,6 +13,8 @@ const getFilterOptions = (filterOptions, query) => {
 				}
 				continue;
 			}
+
+			opt.checked = opt.checked || false;
 		}
 	};
 
