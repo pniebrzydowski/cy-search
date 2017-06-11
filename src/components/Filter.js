@@ -22,7 +22,7 @@ const renderNodes = (item, tree, onFilterAdd, onFilterRemove) => {
 			<div>
 				{nodes.map(node =>
 					<div key={node.id}>
-						{node.value}
+						<h4>{node.value}</h4>
 
 						{renderNodes(node, tree.concat(node.id), onFilterAdd, onFilterRemove)}
 					</div>
@@ -51,7 +51,7 @@ const renderNodes = (item, tree, onFilterAdd, onFilterRemove) => {
 
 const Filter = (filter, onFilterAdd, onFilterRemove) => (
 	<div className="list-group-item" key={filter.id}>
-		{filter.value}
+		<h3>{filter.value}</h3>
 
 		{renderNodes(filter, [filter.id], filter.onFilterAdd, filter.onFilterRemove)}
 	</div>

@@ -48,11 +48,11 @@ class App extends Component {
 					<SearchHeader />
 				</div>
 				<div className="row">
-					<div className="col-md-3 col-sm-4">
-						<Filters />
-					</div>
-					<div className="col-md-9 col-sm-8">
+					<div className=" col-md-9 col-md-push-3 col-sm-8 col-sm-push-4 col-xs-12">
 						<Products />
+					</div>
+					<div className="col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8 col-xs-12">
+						<Filters />
 					</div>
 				</div>
 			</div>
