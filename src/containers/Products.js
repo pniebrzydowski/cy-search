@@ -8,7 +8,7 @@ const getVisibleProducts = (products) => {
 			p.pricePerDay.price = Math.round(p.pricePerDay.price * 100) / 100;
 		}
 		if(p.pricePerHour) {
-			p.pricePerHour.price = Math.round(p.pricePerDay.price * 100) / 100;
+			p.pricePerHour.price = Math.round(p.pricePerHour.price * 100) / 100;
 		}
 	}
 	return products.items;

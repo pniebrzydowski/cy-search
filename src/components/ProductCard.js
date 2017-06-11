@@ -9,7 +9,7 @@ const ProductCard = (product) => (
 				<h3>{product.title}</h3>
 				<p>{product.productType.value}</p>
 				<p>
-					{product.pricePerDay.price} {product.pricePerDay.currency} per day
+					{product.pricePerDay ? product.pricePerDay.price + product.pricePerDay.currency + ' per day' : ''}
 					{product.pricePerHour ? ', '+product.pricePerHour.price+' '+product.pricePerHour.currency+' per hour' : ''}
 				</p>
 				<p><a href="#" className="btn btn-primary" role="button">Check Availability</a></p>
