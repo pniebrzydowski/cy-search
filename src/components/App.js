@@ -14,12 +14,14 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		const { dispatch } = this.props;
+		this.fetchFromUrl(this.props.history.location.search);
+	}
 
+	fetchFromUrl(urlQueryParams) {
+		const { dispatch } = this.props;
+		let params = queryString.parse(urlQueryParams);
 		let query = '';
 		let filters = [];
-		let urlQueryParams = this.props.history.location.search;
-		let params = queryString.parse(urlQueryParams);
 
 		for( let key in params) {
 			if(key === 'query') {
@@ -36,12 +38,21 @@ class App extends Component {
 		}
 		dispatch(fetchFilters(filters));
 		dispatch(urlFetch({query: query, queryVal: query, filters: filters}));
+
 		let url =
 			'https://www.checkyeti.com/rest/v1/customer/products' + urlQueryParams;
 		dispatch(fetchProducts(url));
 	}
 
 	componentDidUpdate(prevProps) {
+		const { history, query } = this.props;
+
+		if( this.props.location !== prevProps.location ) {
+			let urlQueryParams = this.props.history.location.search;
+			this.fetchFromUrl(urlQueryParams);
+			return;
+		}
+
 		if(	this.props.query.query === prevProps.query.query &&
 				this.props.query.filters === prevProps.query.filters) {
 			return;
@@ -50,7 +61,6 @@ class App extends Component {
 			return;
 		}
 
-		const { dispatch, history, query } = this.props;
 		let queryString = '?';
 		if(query.query !== '') {
 			queryString += "query=" + query.query;
@@ -63,10 +73,8 @@ class App extends Component {
 			}
 			filterString += filter.key + "=" + filter.value;
 		}
-		let url =
-			'https://www.checkyeti.com/rest/v1/customer/products' + queryString + filterString;
-		dispatch(fetchProducts(url));
-		history.push(queryString + filterString);
+		let urlQueryString = queryString + filterString;
+		history.push(urlQueryString);
 	}
 
 	render () {
