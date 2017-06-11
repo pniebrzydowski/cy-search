@@ -48,6 +48,7 @@ function query(state = {
 			});
 			return {
 				...state,
+				urlFetch: false,
 				filters: [
 					...state.filters.slice(0, index),
 					...state.filters.slice(index + 1)
