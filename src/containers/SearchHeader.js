@@ -27,8 +27,8 @@ const SearchHeader = ({ queryVal, terms, submitSearch, updateQueryVal, onTermCli
 								</div>
 							</div>
 							<div className="row">
-								<div className="col-md-3 col-sm-4 col-xs-12"></div>
-								<div className="col-md-6 col-sm-5-col-xs12">
+								<div className="control-label col-md-3 col-sm-4 col-xs-12"></div>
+								<div className="col-md-6 col-sm-5 col-xs-12">
 									<Autocomplete terms={terms} onTermClick={onTermClick} />
 								</div>
 							</div>
