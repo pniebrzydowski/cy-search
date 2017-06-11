@@ -6,17 +6,13 @@ const getFilterOptions = (filterOptions, query) => {
 	let updateItems = (items) => {
 		for(let opt of items) {
 			opt.id = opt.key;
+
 			if(opt.depth && opt.depth > 0) {
 				if(opt.children) {
 					updateItems(opt.children);
 				}
 				continue;
 			}
-
-			let applied = query.filters.find((filter) => {
-				return filter.value === opt.id;
-			});
-			opt.isApplied = (applied !== undefined)
 		}
 	};
 

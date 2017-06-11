@@ -46,6 +46,33 @@ function filterOptions(state = {
 	items: []
 }, action) {
 	switch (action.type) {
+		case ADD_FILTER:
+		case REMOVE_FILTER:
+			let updateObject = function(object, tree, opt) {
+				if(!object.children || tree.length === 0) {
+					return {
+						...object,
+						...opt
+					};
+				}
+				const [curCat, ...restCats] = tree;
+
+				return {
+					...object,
+					children: object.children.map((child) => {
+						if (!restCats.includes(child.key)) return child;
+
+						return updateObject(child, restCats, opt)
+					})
+				}
+			};
+
+			return {
+				...state,
+				items: state.items.map((option) => {
+					return updateObject(option, action.filter.tree, action.filter.opt)
+				})
+			};
 		case REQUEST_FILTERS:
 			return {
 				...state,
