@@ -10,6 +10,8 @@ export const REQUEST_FILTERS = 'REQUEST_FILTERS';
 export const RECEIVE_FILTERS = 'RECEIVE_FILTERS';
 export const REQUEST_PRODUCTS = 'REQUEST_PRODUCTS';
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
+export const REQUEST_TERMS = 'REQUEST_TERMS';
+export const RECEIVE_TERMS = 'RECEIVE_TERMS';
 
 //other constants
 export function fetchFilters(filters) {
@@ -30,6 +32,17 @@ export function fetchProducts(url) {
 			method: 'GET'
 		}).then(response => response.json())
 			.then(json => dispatch(receiveProducts(json)));
+	}
+}
+
+export function fetchTerms(term) {
+	let url = 'https://www.checkyeti.com/rest/v1/customer/autocomplete?term=' + term;
+	return function (dispatch) {
+		dispatch(requestTerms());
+		return fetch(url, {
+			method: 'GET'
+		}).then(response => response.json())
+			.then(json => dispatch(receiveTerms(json)));
 	}
 }
 
@@ -99,5 +112,16 @@ export function receiveProducts(json) {
 		type: RECEIVE_PRODUCTS,
 		products: json,
 		receivedAt: Date.now()
+	}
+}
+
+export function requestTerms() {
+	return { type: REQUEST_TERMS };
+}
+
+export function receiveTerms(json) {
+	return {
+		type: RECEIVE_TERMS,
+		terms: json
 	}
 }
